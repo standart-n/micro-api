@@ -1,5 +1,22 @@
 <? class sip {
 
+function getCmd(&$q) { $n="\r\n";
+	if (($q->url->mode=="pid") || ($q->url->mode=="profileid")) {
+		echo $this->getSipNumbersByProfileId($q);
+	}
+	if (($q->url->mode=="p") || ($q->url->mode=="profile")) {
+		echo $this->getSipNumbersByProfileName($q);
+	}
+	if (($q->url->mode=="uid") || ($q->url->mode=="userid")) {
+		echo $this->getSipNumbersByUserId($q);
+	}
+	if (($q->url->mode=="u") || ($q->url->mode=="user")) {
+		echo $this->getSipNumbersByUserName($q);
+	}
+	if ($q->url->t) { echo $n; }
+}
+
+
 function getSipNumbersByUserId(&$q) { $s=""; $i=-1; $ms=array();
 	foreach (explode(",",$q->url->msOfId) as $user_id) {
 		$q->validate->urlInt($user_id);
@@ -63,7 +80,11 @@ function showResult(&$q,$ms,$i) { $s=""; $n="\r\n";
 			break;
 			default:
 				if ($q->url->inc==-100) { 
-					$s.=implode($n,$ms[$q->url->res]);
+					if (isset($ms[$q->url->res])) {
+						if (sizeof($ms[$q->url->res]>0)) {
+							$s.=implode($n,$ms[$q->url->res]);
+						}
+					}
 				} else {
 					if (intval($q->url->inc)<=intval($i)) {
 						$s.=$ms[$q->url->res][$q->url->inc];
@@ -78,7 +99,7 @@ function showResult(&$q,$ms,$i) { $s=""; $n="\r\n";
 
 function getDataFromUserComp(&$q,$query,&$ms,&$i) { 
 	while ($r=ibase_fetch_object($query)) { $i++;
-		if (isset($r)) { 
+		if (isset($r)) {
 			$ms["phone"][$i]=intval($r->PHONE);
 			$ms["id"][$i]=intval($r->USER_ID);
 			$ms["userid"][$i]=intval($r->USER_ID);
