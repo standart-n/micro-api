@@ -18,54 +18,62 @@ function getCmd(&$q) { $n="\r\n";
 
 
 function getSipNumbersByUserId(&$q) { $s=""; $i=-1; $ms=array();
-	foreach (explode(",",$q->url->msOfId) as $user_id) {
-		$q->validate->urlInt($user_id);
-		$sql=$q->sql_sip->getSipNumbersByUserId($q,$user_id);
-		$query=ibase_query($q->fdb_it,$sql);
-		if (isset($query)) { if ($query) {
-			$this->getDataFromUserComp($q,$query,$ms,$i);
-		} }
+	if (isset($q->fdb_it)) {
+		foreach (explode(",",$q->url->msOfId) as $user_id) {
+			$q->validate->urlInt($user_id);
+			$sql=$q->sql_sip->getSipNumbersByUserId($q,$user_id);
+			$query=@ibase_query($q->fdb_it,$sql);
+			if (isset($query)) { if ($query) {
+				$this->getDataFromUserComp($q,$query,$ms,$i);
+			} }
+		}
 	}
 	$s.=$this->showResult($q,$ms,$i);
 	return $s;
 }
 
 function getSipNumbersByProfileId(&$q) { $s=""; $i=-1; $ms=array();
-	foreach (explode(",",$q->url->msOfId) as $profile_id) {
-		$q->validate->urlInt($profile_id);
-		$sql=$q->sql_sip->getSipNumbersByProfileId($q,$profile_id);
-		$query=ibase_query($q->fdb_it,$sql);
-		if (isset($query)) { if ($query) {
-			$this->getDataFromUserComp($q,$query,$ms,$i);
-		} }
+	if (isset($q->fdb_it)) {
+		foreach (explode(",",$q->url->msOfId) as $profile_id) {
+			$q->validate->urlInt($profile_id);
+			$sql=$q->sql_sip->getSipNumbersByProfileId($q,$profile_id);
+			$query=@ibase_query($q->fdb_it,$sql);
+			if (isset($query)) { if ($query) {
+				$this->getDataFromUserComp($q,$query,$ms,$i);
+			} }
+		}
 	}
 	$s.=$this->showResult($q,$ms,$i);
 	return $s;
 }
 
 function getSipNumbersByUserName(&$q) { $s=""; $i=-1; $ms=array();
-	foreach (explode(",",$q->url->msOfNames) as $user) {
-		$user=$q->validate->toWin($user);
-		$q->validate->urlStr($user);
-		$sql=$q->sql_sip->getSipNumbersByUserName($q,$user);
-		$query=ibase_query($q->fdb_it,$sql);
-		if (isset($query)) { if ($query) {
-			$this->getDataFromUserComp($q,$query,$ms,$i);
-		} }
+	if (isset($q->fdb_it)) {
+		foreach (explode(",",$q->url->msOfNames) as $user) {
+			$user=$q->validate->toWin($user);
+			$q->validate->urlStr($user);
+			$sql=$q->sql_sip->getSipNumbersByUserName($q,$user);
+			$query=@ibase_query($q->fdb_it,$sql);
+			if (isset($query)) { if ($query) {
+				$this->getDataFromUserComp($q,$query,$ms,$i);
+			} }
+		}
 	}
 	$s.=$this->showResult($q,$ms,$i);
 	return $s;
 }
 
 function getSipNumbersByProfileName(&$q) { $s=""; $i=-1; $ms=array();
-	foreach (explode(",",$q->url->msOfNames) as $profile) {
-		$profile=$q->validate->toWin($profile);
-		$q->validate->urlStr($profile);
-		$sql=$q->sql_sip->getSipNumbersByProfileName($q,$profile);
-		$query=ibase_query($q->fdb_it,$sql);
-		if (isset($query)) { if ($query) {
-			$this->getDataFromUserComp($q,$query,$ms,$i);
-		} }
+	if (isset($q->fdb_it)) {
+		foreach (explode(",",$q->url->msOfNames) as $profile) {
+			$profile=$q->validate->toWin($profile);
+			$q->validate->urlStr($profile);
+			$sql=$q->sql_sip->getSipNumbersByProfileName($q,$profile);
+			$query=@ibase_query($q->fdb_it,$sql);
+			if (isset($query)) { if ($query) {
+				$this->getDataFromUserComp($q,$query,$ms,$i);
+			} }
+		}
 	}
 	$s.=$this->showResult($q,$ms,$i);
 	return $s;
