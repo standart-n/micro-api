@@ -2,20 +2,29 @@ SIP API v1.0 - (C) 2012 www.standart-n.ru
 
 ***
 
-# USAGE: #
+Функционал представляет собой прослойку между asterisk'ом и базой firebird<br>
+для более гибкой настройки ip-телефонии в программе документооборота Стандарт-Н.
+
+# Использование: #
 
 ## sip
-command for get SIP info from FireBird<br/>
-**example**:<br/>
+Команда sip позволяет найти данные о пользователях по ID их профиля.<br/>
+Команда используется при переадресации звонков.<br/>
+**пример**:<br/>
 `php5 api.php sip -g phone -pid 2,3,5 --t`<br/>
-`php5 api.php sip get user profileid 2,3,5 -inc 1 -t`<br/>
+`php5 api.php sip get user profileid 2,3,5 -inc 1`<br/>
 
 ## msg
-command for send message in UDP socket on ipadress:port<br/>
-**example**:<br/>
+Команда msg позволяет отправить UPD сокет на определенный ip-адрес.<br/>
+В параметрах указывается текст сообщения, ip-адрес и порт<br/>
+**пример**:<br/>
 `php5 api.php msg -s 'hello' -ip 192.168.67.44 -p 80`<br/>
 
 ## getip
-command for get IP address by phone number from FireBird database<br/>
-**example**:<br/>
-`php5 api.php getip -p 4444`
+Команда getip находит в базе компьютер клиента по номеру его телефона и возвращает его ip-адрес<br/>
+**пример**:<br/>
+`php5 api.php getip -p 4444`<br/>
+
+## Дополнительно:
+Параметр --t нужен, чтобы в конце ответа был переход на новую строку.<br/>
+При использовании команд в asterisk'e, этот параметр не нужен<br/>
