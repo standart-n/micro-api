@@ -4,7 +4,7 @@ function getCmd(&$q) { $n="\r\n";
 	$this->ms=array();
 	$this->ms['cmd']="updatesrc";
 	$this->ms['return']=$this->getClid($q);
-	echo json_encode($this->ms);
+	//echo json_encode($this->ms);
 	if ($q->url->t) { echo $n; }
 }
 
@@ -29,7 +29,7 @@ function updSrc(&$q,$id="",$clid="") {
 		if (($id!="") && ($clid!="")) {
 			$clid=trim($clid);
 			$src=preg_replace('/\"(.*)\"(.*)<(.*)>/i','$1',$clid);
-			$src=trim($src);
+			$src=trim($src)
 			$this->ms["id"]=$id;
 			$this->ms["src"]=$src;
 			$this->ms["clid"]=$clid;
