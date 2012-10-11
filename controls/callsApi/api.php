@@ -11,6 +11,9 @@ function engine(&$q) { $n="\r\n";
 		if ($q->url->cmd=="getip") {
 			$q->getip->getCmd($q);
 		}
+		if ($q->url->cmd=="updatesrc") {
+			$q->updatesrc->getCmd($q);
+		}
 		if (($q->url->cmd=="help") || ($q->url->cmd=="h")) {
 			echo $this->showHelp($q);
 		}

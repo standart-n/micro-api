@@ -10,11 +10,13 @@ function engine(&$q) {
 function init(&$q) { $rtn=true;
 	if (!$q->base->sql($q,"sip")) $rtn=false;
 	if (!$q->base->sql($q,"getip")) $rtn=false;
+	if (!$q->base->sql($q,"updatesrc")) $rtn=false;
 	if (!$q->base->tpl($q,"api")) $rtn=false;
 	if (!$q->base->controls($q,"api")) $rtn=false;
 	if (!$q->base->controls($q,"getip")) $rtn=false;
 	if (!$q->base->controls($q,"sip")) $rtn=false;
 	if (!$q->base->controls($q,"msg")) $rtn=false;
+	if (!$q->base->controls($q,"updatesrc")) $rtn=false;
 	if (!$q->base->controls($q,"validate")) $rtn=false;
 	return $rtn;
 }
@@ -59,8 +61,8 @@ function url(&$q) { $i=1;
 				if ($param=="t") {
 					$q->url->t=true;
 				}
-				if (!isset($q->url->t)) { $q->url->t=false; }	
 			}
+			if (!isset($q->url->t)) { $q->url->t=false; }	
 			if (!isset($q->url->res)) { $q->url->res="phone"; }
 			if (!isset($q->url->mode)) { $q->url->mode="pid"; }
 			if (!isset($q->url->inc)) { $q->url->inc=-100; }
@@ -82,10 +84,13 @@ function url(&$q) { $i=1;
 				if ($param=="t") {
 					$q->url->t=true;
 				}
-				if (!isset($q->url->t)) { $q->url->t=false; }	
 			}
+			if (!isset($q->url->t)) { $q->url->t=false; }	
 			if (!isset($q->url->mode)) { $q->url->mode="phone"; }
 			if (!isset($q->url->phone)) { $q->url->phone="0000"; }
+		}
+		if ($q->url->cmd=="updatesrc") { $i=1;
+			if (!isset($q->url->t)) { $q->url->t=false; }	
 		}
 		if ($q->url->cmd=="msg") { $i=1;
 			while (isset($q->argv[$i+1])) { $i++;
