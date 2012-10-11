@@ -27,7 +27,9 @@ function getClid(&$q) {
 function updSrc(&$q,$id="",$clid="") {
 	if (isset($q->db)) {
 		if (($id!="") && ($clid!="")) {
-			$src=preg_replace('/\"(.*)\"/i','$1',trim($clid));
+			$clid=trim($clid);
+			$src=preg_replace('/\"(.*)\"(.*)<(.*)>/i','$1',$clid);
+			$src=trim($src);
 			$this->ms["id"]=$id;
 			$this->ms["src"]=$src;
 			$this->ms["clid"]=$clid;
