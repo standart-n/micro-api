@@ -27,7 +27,7 @@ SIP API v1.0 - (C) 2012 www.standart-n.ru
 
 ## updatesrc
 Команда в mysql базе в таблице cdr берет посл. строчку и в ней берет номер телефона в поле clid<br/>
-и вставляет его в поле src
+и вставляет его в поле src<br/>
 **пример**:<br/>
 `php5 api.php updatesrc`<br/>
 
