@@ -7,9 +7,9 @@ function getClid(){ $s="";
 	return $s;
 }
 
-function updSrc($id,$src) { $s="";
+function updSrc($id,$src="",$json="") { $s="";
 	$s.="UPDATE cdr ";
-	$s.="SET src='".$src."' ";
+	$s.="SET src='".$src."', buf='".$json."' ";
 	$s.="WHERE (id=".$id.") ";
 	$s.="LIMIT 1 ";
 	return $s;

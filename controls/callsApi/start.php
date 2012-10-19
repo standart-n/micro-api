@@ -14,6 +14,7 @@ function init(&$q) { $rtn=true;
 	if (!$q->base->tpl($q,"api")) $rtn=false;
 	if (!$q->base->controls($q,"api")) $rtn=false;
 	if (!$q->base->controls($q,"getip")) $rtn=false;
+	if (!$q->base->controls($q,"phone")) $rtn=false;
 	if (!$q->base->controls($q,"sip")) $rtn=false;
 	if (!$q->base->controls($q,"msg")) $rtn=false;
 	if (!$q->base->controls($q,"updatesrc")) $rtn=false;
@@ -68,6 +69,26 @@ function url(&$q) { $i=1;
 			if (!isset($q->url->inc)) { $q->url->inc=-100; }
 			if (!isset($q->url->msOfId)) { $q->url->msOfId="0"; }
 			if (!isset($q->url->msOfNames)) { $q->url->msOfNames="0"; }
+		}
+		if ($q->url->cmd=="phone") { $i=1;
+			while (isset($q->argv[$i+1])) { $i++;
+				$param=strval($q->argv[$i]);
+				$q->validate->edit($param);
+				if (($param=="s") || ($param=="space")) {
+					$q->url->mode=$param;
+					if (isset($q->argv[$i+1])) {
+						$value=strval($q->argv[$i+1]);
+						$q->validate->edit($value);
+						$q->url->phone=$value;
+					}				
+				}
+				if ($param=="t") {
+					$q->url->t=true;
+				}
+			}
+			if (!isset($q->url->t)) { $q->url->t=false; }	
+			if (!isset($q->url->phone)) { $q->url->phone="0000"; }
+			if (!isset($q->url->mode)) { $q->url->mode="space"; }
 		}
 		if ($q->url->cmd=="getip") { $i=1;
 			while (isset($q->argv[$i+1])) { $i++;

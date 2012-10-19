@@ -5,6 +5,9 @@ function engine(&$q) { $n="\r\n";
 		if ($q->url->cmd=="sip") {
 			$q->sip->getCmd($q);
 		}
+		if ($q->url->cmd=="phone") {
+			$q->phone->getCmd($q);
+		}
 		if ($q->url->cmd=="msg") {
 			$q->msg->getCmd($q);
 		}
