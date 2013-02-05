@@ -19,6 +19,8 @@ function getIpByPhone(&$q) { $s="";
 				}
 			} }
 		} }
+		@ibase_commit($q->fdb_it);
+		@ibase_close();
 	}
 	return $s;
 }
