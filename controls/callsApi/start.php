@@ -110,6 +110,39 @@ function url(&$q) { $i=1;
 			if (!isset($q->url->mode)) { $q->url->mode="phone"; }
 			if (!isset($q->url->phone)) { $q->url->phone="0000"; }
 		}
+
+		if ($q->url->cmd=="socket") { $i=1;
+			while (isset($q->argv[$i+1])) { $i++;
+				$param=strval($q->argv[$i]);
+				$q->validate->edit($param);
+				if (($param=="str") || ($param=="s")) {
+					if (isset($q->argv[$i+1])) {
+						$value=strval($q->argv[$i+1]);
+						$q->validate->edit($value);
+						$q->url->str=$value;
+					}				
+				}
+				if (($param=="ip")) {
+					if (isset($q->argv[$i+1])) {
+						$value=strval($q->argv[$i+1]);
+						$q->validate->edit($value);
+						$q->url->ip=$value;
+					}				
+				}
+				if (($param=="port") || ($param=="p")) {
+					if (isset($q->argv[$i+1])) {
+						$value=strval($q->argv[$i+1]);
+						$q->validate->edit($value);
+						$q->url->port=intval($value);
+					}				
+				}
+			}
+			if (!isset($q->url->str)) { $q->url->str="standart-n"; }
+			if (!isset($q->url->ip)) { $q->url->ip="127.0.0.1"; }
+			if (!isset($q->url->port)) { $q->url->port=80; }
+		}
+
+
 		if ($q->url->cmd=="updatesrc") { $i=1;
 			if (!isset($q->url->t)) { $q->url->t=false; }	
 		}
